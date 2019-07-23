@@ -1,0 +1,488 @@
+<html>
+<head>
+<meta charset=utf-8 />
+<title>West Roxbury Atlas Menu</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='index_all.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+#info {
+	position:absolute; 
+	top:5; 
+	right:200; 
+	width: 280; 
+	padding:5px;
+	background: rgba(0,255,0,.8); 
+	z-index:500; 
+	font: 14px Sans;
+}
+</style>
+</head>
+
+
+
+
+
+
+
+
+<body>
+
+ 
+
+<style>
+
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:130px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+ .menu-ui a {
+    font-size:11px;
+    color:#212121;
+    display:block;
+    margin:0;padding:0;
+    padding:1.5px;
+    text-decoration:none;
+   font-family: Arial,Helvetica Neue,Helvetica,sans-serif; 
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:left;
+    }
+   .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#e9e8e8;
+      color:#212121;
+      padding:8px;
+      }
+    .menu-ui a.active {
+      background:#3887BE;
+      color:#FFF;
+      }
+      .menu-ui a.active:hover {
+        background:#3074a4;
+        }
+.custom-popup .leaflet-popup-content-wrapper {
+  background:#dbd9d9;
+  color:#000;
+  font-size:15px;
+  font-family: Arial,Helvetica Neue,Helvetica,sans-serif; 
+  line-height:24px;
+
+  }
+.custom-popup .leaflet-popup-content-wrapper a {
+  color:red;
+  }
+.custom-popup .leaflet-popup-tip-container {
+  width:25px;
+  height:12px;
+  }
+.custom-popup .leaflet-popup-tip {
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-top:15px solid #dbd9d9;
+  }
+
+
+
+</style>
+
+
+
+
+
+<nav id='menu-ui' class='menu-ui'></nav>
+
+
+<div id="info" style="">This index covers digitized atlases only. See the full list below the map for additional atlases.</div>
+
+<div class='custom-popup' id='map'></div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZXZhbnRob3JuYmVycnkiLCJhIjoiemVQMDBUdyJ9.aK0EfwMvPgquXMmxLf73lw';
+
+
+// Create a map in the div #map
+var tiles = L.tileLayer('http://b.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+	    
+        
+    	transparency: true,
+    	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.  Representative of the holdings at <a href="http://maps.bpl.org" target="_blank"><strong>The Leventhal Map Center</strong></a>.'}
+    	
+    	);
+
+
+
+var map = L.map('map', {
+	maxZoom: 19,
+        minZoom: 12,
+        maxBounds: [
+    	[42.13082, -71.26556],
+    	[42.54094, -70.79041]
+    	]
+})
+
+    .addLayer(tiles)
+
+    .setView([42.3175, -71.05], 12)
+    
+    .addControl(L.mapbox.geocoderControl('mapbox.places-v1',
+    	{
+        autocomplete: true,
+
+       
+    }));
+
+
+
+
+
+
+
+
+
+
+
+var layers = document.getElementById('menu-ui');
+</script>
+
+
+<script>
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+    // This adds the above geoJson and its style and onEachFeature to my map
+var stylehop1875wrox = {
+	color:"green", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylehop1875wroxmo = {
+	color:"green", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylehop1882bos = {
+	color:"orange", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylehop1882bosmo = {
+	color:"orange", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1884wrox = {
+	color:"blue", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1884wroxmo = {
+	color:"blue", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1890wrox_v6 = {
+	color:"purple", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1890wrox_v6mo = {
+	color:"purple", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1896wrox = {
+	color:"red", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1896wroxmo = {
+	color:"red", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylerich1899dor_wrox_bri = {
+	color:"#ff704d", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylerich1899dor_wrox_brimo = {
+	color:"#ff704d", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1905wrox = {
+	color:"#ff8000", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1905wroxmo = {
+	color:"#ff8000", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1914wrox = {
+	color:"lime", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1914wroxmo = {
+	color:"lime", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1924wrox = {
+	color:"orange", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1924wroxmo = {
+	color:"orange", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylesan1963jp = {
+	color:"#3ea4ec", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylesan1963jpmo = {
+	color:"#3ea4ec", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylesan1963ger = {
+	color:"#ff0066", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylesan1963germo = {
+	color:"#ff0066", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylesan1963hp = {
+    color:"#B79762", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylesan1963hpmo = {
+    color:"#B79762", opacity:".8", weight:"4", fillOpacity:".5"};
+
+
+// this function creates a popup showing the layer name
+function onEachFeaturehop1875wrox(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylehop1875wrox);
+   
+        (function (layer, properties){
+            layer.on("mouseover", function(e){
+                layer.setStyle(stylehop1875wroxmo);
+                
+            });
+            layer.on("mouseout", function(e){
+                layer.setStyle(stylehop1875wrox);
+                
+            });
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturehop1882bos(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylehop1882bos);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylehop1882bosmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylehop1882bos);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1884wrox(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1884wrox);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1884wroxmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1884wrox);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1890wrox_v6(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1890wrox_v6);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1890wrox_v6mo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1890wrox_v6);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1896wrox(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1896wrox);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1896wroxmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1896wrox);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturerich1899dor_wrox_bri(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylerich1899dor_wrox_bri);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylerich1899dor_wrox_brimo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylerich1899dor_wrox_bri);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1905wrox(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1905wrox);
+   
+        (function (layer, properties){
+            layer.on("mouseover", function(e){
+                layer.setStyle(stylebrom1905wroxmo);
+                
+            });
+            layer.on("mouseout", function(e){
+                layer.setStyle(stylebrom1905wrox);
+                
+            });
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1914wrox(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1914wrox);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1914wroxmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1914wrox);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1924wrox(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1924wrox);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1924wroxmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1924wrox);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturesan1963jp(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" );
+        layer.setStyle(stylesan1963jp);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylesan1963jpmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylesan1963jp);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturesan1963ger(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" );
+        layer.setStyle(stylesan1963ger);
+   
+        (function (layer, properties){
+            layer.on("mouseover", function(e){
+                layer.setStyle(stylesan1963germo);
+                
+            });
+            layer.on("mouseout", function(e){
+                layer.setStyle(stylesan1963ger);
+                
+            });
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturesan1963hp(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" );
+        layer.setStyle(stylesan1963hp);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylesan1963hpmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylesan1963hp);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+// this is my geojson variable for 1883 boston proper
+
+
+
+addLayer(L.geoJson(indexhop1875wrox, {onEachFeature: onEachFeaturehop1875wrox,}), '1875 West Roxbury', 1);
+addLayer(L.geoJson(indexhop1882bos, {onEachFeature: onEachFeaturehop1882bos,}), '1882 Boston', 1);
+addLayer(L.geoJson(indexbrom1884wrox, {onEachFeature: onEachFeaturebrom1884wrox,}), '1884 West Roxbury', 2);
+addLayer(L.geoJson(indexbrom1890wrox_v6, {onEachFeature: onEachFeaturebrom1890wrox_v6,}), '1890 West Roxbury', 3);
+addLayer(L.geoJson(indexbrom1896wrox, {onEachFeature: onEachFeaturebrom1896wrox,}), '1896 West Roxbury', 4);
+addLayer(L.geoJson(indexrich1899dor_wrox_bri, {onEachFeature: onEachFeaturerich1899dor_wrox_bri,}), '1899 Dorchester, West Roxbury & Brighton', 5);
+addLayer(L.geoJson(indexbrom1905wrox, {onEachFeature: onEachFeaturebrom1905wrox,}), '1905 West Roxbury', 6);
+addLayer(L.geoJson(indexbrom1914wrox, {onEachFeature: onEachFeaturebrom1914wrox,}), '1914 West Roxbury', 7);
+addLayer(L.geoJson(indexbrom1924wrox, {onEachFeature: onEachFeaturebrom1924wrox,}), '1924 West Roxbury', 8);
+
+
+
+function addLayer(layer, name, zIndex){
+	layer
+		.setZIndex(zIndex)
+        
+		var link = document.createElement('a');
+        link.href = '#';
+        link.className = '';
+        link.innerHTML = name;
+
+    link.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+       
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
+            this.className = '';
+        } else {
+            map.addLayer(layer);
+            this.className = 'active';
+        }
+    };
+
+    layers.appendChild(link);
+
+}
+
+
+
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47313789-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

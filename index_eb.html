@@ -1,0 +1,469 @@
+<html>
+<head>
+<meta charset=utf-8 />
+<title>East Boston Atlas Menu</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='index_all.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+#info {
+	position:absolute; 
+	top:5; 
+	right:200; 
+	width: 280; 
+	padding:5px;
+	background: rgba(0,255,0,.8); 
+	z-index:500; 
+	font: 14px Sans;
+}
+</style>
+</head>
+
+
+
+
+
+
+
+
+<body>
+
+ 
+
+<style>
+
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:130px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+ .menu-ui a {
+    font-size:11px;
+    color:#212121;
+    display:block;
+    margin:0;padding:0;
+    padding:1.5px;
+    text-decoration:none;
+   font-family: Arial,Helvetica Neue,Helvetica,sans-serif; 
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:left;
+    }
+   .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#e9e8e8;
+      color:#212121;
+      padding:8px;
+      }
+    .menu-ui a.active {
+      background:#3887BE;
+      color:#FFF;
+      }
+      .menu-ui a.active:hover {
+        background:#3074a4;
+        }
+.custom-popup .leaflet-popup-content-wrapper {
+  background:#dbd9d9;
+  color:#000;
+  font-size:15px;
+  font-family: Arial,Helvetica Neue,Helvetica,sans-serif; 
+  line-height:24px;
+
+  }
+.custom-popup .leaflet-popup-content-wrapper a {
+  color:red;
+  }
+.custom-popup .leaflet-popup-tip-container {
+  width:25px;
+  height:12px;
+  }
+.custom-popup .leaflet-popup-tip {
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-top:15px solid #dbd9d9;
+  }
+
+
+
+</style>
+
+
+
+
+
+<nav id='menu-ui' class='menu-ui'></nav>
+
+
+<div id="info" style="">This index covers digitized atlases only. See the full list below the map for additional atlases.</div>
+
+<div class='custom-popup' id='map'></div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZXZhbnRob3JuYmVycnkiLCJhIjoiemVQMDBUdyJ9.aK0EfwMvPgquXMmxLf73lw';
+
+
+// Create a map in the div #map
+var tiles = L.tileLayer('http://b.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+	    
+        
+    	transparency: true,
+    	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.  Representative of the holdings at <a href="http://maps.bpl.org" target="_blank"><strong>The Leventhal Map Center</strong></a>.'}
+    	
+    	);
+
+
+
+var map = L.map('map', {
+	maxZoom: 19,
+        minZoom: 12,
+        maxBounds: [
+    	[42.13082, -71.26556],
+    	[42.54094, -70.79041]
+    	]
+})
+
+    .addLayer(tiles)
+
+    .setView([42.3175, -71.05], 12)
+    
+    .addControl(L.mapbox.geocoderControl('mapbox.places-v1',
+    	{
+        autocomplete: true,
+
+       
+    }));
+
+
+
+
+
+
+
+
+
+
+
+var layers = document.getElementById('menu-ui');
+</script>
+
+
+<script>
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+    // This adds the above geoJson and its style and onEachFeature to my map
+var stylesan1868bos_v2 = {
+	color:"green", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylesan1868bos_v2mo = {
+	color:"green", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylesan1870bos_v2 = {
+	color:"blue", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylesan1870bos_v2mo = {
+	color:"blue", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylehop1874eb = {
+	color:"purple", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylehop1874ebmo = {
+	color:"purple", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylehop1882bos = {
+	color:"orange", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylehop1882bosmo = {
+	color:"orange", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1884sb = {
+	color:"red", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1884sbmo = {
+	color:"red", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylesan1884sb_v3 = {
+	color:"#ff704d", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylesan1884sb_v3mo = {
+	color:"#ff704d", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1892eb_v9 = {
+	color:"#ff8000", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1892eb_v9mo = {
+	color:"#ff8000", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1901eb = {
+	color:"lime", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1901ebmo = {
+	color:"lime", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1912ch = {
+	color:"orange", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1912chmo = {
+	color:"orange", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylebrom1922ch = {
+	color:"#3ea4ec", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylebrom1922chmo = {
+	color:"#3ea4ec", opacity:".8", weight:"4", fillOpacity:".5"};
+var stylesan1963eb = {
+	color:"#ff0066", opacity:".8", weight:"2",fillOpacity:".3"};
+var stylesan1963ebmo = {
+	color:"#ff0066", opacity:".8", weight:"4", fillOpacity:".5"};
+
+// this function creates a popup showing the layer name
+function onEachFeaturesan1868bos_v2(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylesan1868bos_v2);
+   
+        (function (layer, properties){
+            layer.on("mouseover", function(e){
+                layer.setStyle(stylesan1868bos_v2mo);
+                
+            });
+            layer.on("mouseout", function(e){
+                layer.setStyle(stylesan1868bos_v2);
+                
+            });
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturesan1870bos_v2(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylesan1870bos_v2);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylesan1870bos_v2mo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylesan1870bos_v2);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturehop1874eb(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylehop1874eb);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylehop1874ebmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylehop1874eb);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturehop1882bos(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylehop1882bos);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylehop1882bosmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylehop1882bos);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1884sb(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1884sb);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1884sbmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1884sb);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturesan1884sb_v3(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylesan1884sb_v3);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylesan1884sb_v3mo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylesan1884sb_v3);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1892eb_v9(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1892eb_v9);
+   
+        (function (layer, properties){
+            layer.on("mouseover", function(e){
+                layer.setStyle(stylebrom1892eb_v9mo);
+                
+            });
+            layer.on("mouseout", function(e){
+                layer.setStyle(stylebrom1892eb_v9);
+                
+            });
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1901eb(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1901eb);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1901ebmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1901eb);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1912ch(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1912ch);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1912chmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1912ch);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturebrom1922ch(feature, layer) {
+    {
+       layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        layer.setStyle(stylebrom1922ch);
+   
+        (function (layer, properties){
+        	layer.on("mouseover", function(e){
+        		layer.setStyle(stylebrom1922chmo);
+        		
+        	});
+        	layer.on("mouseout", function(e){
+        		layer.setStyle(stylebrom1922ch);
+        		
+        	});
+        })(layer, feature.properties);
+    }
+};
+function onEachFeaturesan1963eb(feature, layer) {
+    {
+        layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" );
+        layer.setStyle(stylesan1963eb);
+   
+        (function (layer, properties){
+            layer.on("mouseover", function(e){
+                layer.setStyle(stylesan1963ebmo);
+                
+            });
+            layer.on("mouseout", function(e){
+                layer.setStyle(stylesan1963eb);
+                
+            });
+        })(layer, feature.properties);
+    }
+};
+
+// this is my geojson variable for 1883 boston proper
+
+
+
+addLayer(L.geoJson(indexsan1868bos_v2, {onEachFeature: onEachFeaturesan1868bos_v2,}), '1868 Boston v.2', 1);
+addLayer(L.geoJson(indexsan1870bos_v2, {onEachFeature: onEachFeaturesan1870bos_v2,}), '1870 Boston v.2', 2);
+addLayer(L.geoJson(indexhop1874eb, {onEachFeature: onEachFeaturehop1874eb,}), '1874 East Boston, Chelsea, Revere & Winthrop', 3);
+addLayer(L.geoJson(indexhop1882bos, {onEachFeature: onEachFeaturehop1882bos,}), '1882 Boston', 3);
+addLayer(L.geoJson(indexbrom1884sb, {onEachFeature: onEachFeaturebrom1884sb,}), '1884 South and East Boston', 4);
+addLayer(L.geoJson(indexsan1884sb_v3, {onEachFeature: onEachFeaturesan1884sb_v3,}), '1885 South and East Boston', 5);
+addLayer(L.geoJson(indexbrom1892eb_v9, {onEachFeature: onEachFeaturebrom1892eb_v9,}), '1892 East Boston', 6);
+addLayer(L.geoJson(indexbrom1901eb, {onEachFeature: onEachFeaturebrom1901eb,}), '1901 East Boston', 7);
+addLayer(L.geoJson(indexbrom1912ch, {onEachFeature: onEachFeaturebrom1912ch,}), '1912 Charlestown & East Boston', 8);
+addLayer(L.geoJson(indexbrom1922ch, {onEachFeature: onEachFeaturebrom1922ch,}), '1922 Charlestown & East Boston', 9);
+
+
+
+function addLayer(layer, name, zIndex){
+	layer
+		.setZIndex(zIndex)
+        
+		var link = document.createElement('a');
+        link.href = '#';
+        link.className = '';
+        link.innerHTML = name;
+
+    link.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+       
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
+            this.className = '';
+        } else {
+            map.addLayer(layer);
+            this.className = 'active';
+        }
+    };
+
+    layers.appendChild(link);
+
+}
+
+
+
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47313789-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
