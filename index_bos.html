@@ -439,7 +439,7 @@ function onEachFeaturesan1882bos_v1(feature, layer) {
 function onEachFeaturebrom1883bos(feature, layer) {
     {
         layer.bindPopup("This is <h1><strong>" + feature.properties.plate + "</strong><\/h1> From: <h1><em>" + feature.properties.atlas + "</em><\/h1>" +
-        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' );
+        '<a href="' + layer.feature.properties.url + ' " target="_blank"><h2>VIEW ONLINE<\/h2><\/a>' + '<a href="' + layer.feature.properties.mosaic + ' " target="_blank"><h2>VIEW MOSAIC<\/h2><\/a>' );
         layer.setStyle(stylebrom1883bos);
    
         (function (layer, properties){
